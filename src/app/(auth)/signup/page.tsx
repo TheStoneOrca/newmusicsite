@@ -10,7 +10,7 @@ export default function SignUpPage() {
           Sign Up To Continue Shopping
         </h1>
       </div>
-      <div className="flex justify-center items-center h-[60vh]">
+      <div className="flex justify-center items-center h-[75vh]">
         <SignUpForm />
       </div>
     </div>
