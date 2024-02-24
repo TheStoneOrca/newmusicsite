@@ -4,8 +4,6 @@ import { Button } from "@/components/ui/button";
 import Header from "./__components/header";
 import TypeCard from "./__components/typecard";
 import Link from "next/link";
-import { useEffect } from "react";
-import useUser from "../hooks/getuser";
 
 export default function Home() {
   return (
@@ -24,12 +22,12 @@ export default function Home() {
           <TypeCard type="Strings" />
         </div>
       </div>
-      <div className="flex items-center justify-center text-center mt-48">
+      <div className="flex-grow items-center justify-center text-center mt-48">
         <h1 className="sm:text-5xl md:text-6xl lg:text-4xl">
           For Anything Music, You Can Count On Us.
         </h1>
       </div>
-      <div className="flex justify-center mt-64">
+      <div className="flex justify-center mt-32">
         <Button className="w-32" asChild>
           <Link href="/signup">Shop Now</Link>
         </Button>
