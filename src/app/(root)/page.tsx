@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import Header from "./__components/header";
 import TypeCard from "./__components/typecard";
 import Link from "next/link";
+import { useEffect } from "react";
+import useUser from "../hooks/getuser";
 
 export default function Home() {
   return (
     <div className="flex flex-col gap-y-10 w-full">
-      <div className="flex justify-center text-center items-center">
+      <div className="flex justify-center text-center items-center mt-1">
         <Header />
       </div>
       <div className="flex flex-col w-full gap-y-2 justify-center items-center">

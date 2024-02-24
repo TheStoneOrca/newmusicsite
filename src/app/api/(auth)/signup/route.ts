@@ -32,6 +32,7 @@ export async function POST(Req: Request, Res: Response) {
     ]);
 
     if (checkEmail.rows.length > 0) {
+      await db.end();
       return NextResponse.json({
         status: 406,
         msg: "Email Is Already Registered!",
