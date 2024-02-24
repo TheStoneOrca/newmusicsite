@@ -5,10 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
 export default function TypeCard(props: {
-  type: "Strings" | "Band" | "Orcherstra" | "Piano" | "Solo" | "Rock";
+  type: "Strings" | "Band" | "Orchestra" | "Piano" | "Solo" | "Rock";
 }) {
   return (
-    <Card>
+    <Card className="w-48">
       <CardHeader>
         <CardTitle>{props.type}</CardTitle>
       </CardHeader>
