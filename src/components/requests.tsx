@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -21,6 +22,7 @@ export default function MusicRequests(props: MusicRequest) {
       <CardContent>
         {props.requestfullfilled ? <Success /> : <Error />}
       </CardContent>
+      <CardFooter>Made By {props.email}</CardFooter>
     </Card>
   );
 }

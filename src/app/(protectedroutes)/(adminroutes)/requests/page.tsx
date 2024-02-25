@@ -39,6 +39,7 @@ export default function RequestsPage() {
                 requestmakerid={request.requestmakerid}
                 requestpdf={request.requestpdf}
                 requesttitle={request.requesttitle}
+                email={request.email}
               />
             </div>
           ))}

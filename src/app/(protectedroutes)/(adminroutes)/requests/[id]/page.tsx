@@ -30,7 +30,7 @@ export default function RequestPage() {
   return (
     <div className="flex flex-col w-full">
       {requestDetails ? (
-        <div className="flex flex-col w-full h-[90vh] justify-center items-center">
+        <div className="flex flex-col w-full justify-center items-center">
           <div className="flex flex-col justify-center items-center w-full bg-[#f0f0f0]">
             <h1 className="sm:text-5xl md:text-6xl lg:text-4xl">
               {requestDetails.requesttitle}
@@ -40,14 +40,23 @@ export default function RequestPage() {
               By {requestDetails.fname} {requestDetails.lname}
             </h1>
             <h1 className="text-[12px]">Grade {requestDetails.requestgrade}</h1>
-            <PdfViewer pdfUrl={requestDetails?.requestpdf as any} />
+            <h1 className="text-[12px]">{requestDetails.requestprice}</h1>
+            <div className="flex">
+              <img src={requestDetails.requestimgcover} />
+              <div className="items-center justify-center flex flex-col">
+                <audio controls>
+                  <source src={requestDetails.requestaudiopreview}></source>
+                </audio>
+                <PdfViewer pdfUrl={requestDetails?.requestpdf as any} />
+              </div>
+            </div>
             <div className="mt-5" />
           </div>
           <div className="mt-5 flex flex-col gap-y-5">
             {fullfilled ? <Success /> : <Error />}
             <MarkAsCompleteBtn
               changeFunction={setFullFilled}
-              requestId={requestDetails.requestid}
+              requestId={requestDetails.requestid as any}
             />
           </div>
         </div>

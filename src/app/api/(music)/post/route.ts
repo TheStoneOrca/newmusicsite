@@ -8,24 +8,25 @@ interface RequestDetails {
   coverImg: string;
   pdf: String;
   audio: String;
-  userid: number;
+  email: string;
   price: number;
+  previewpdf: string;
 }
 
 export async function POST(Req: Request, res: Response) {
   try {
     const req: RequestDetails = await Req.json();
-    console.log(req);
 
     if (
-      req.audio &&
-      req.coverImg &&
-      req.description &&
-      req.grade &&
-      req.pdf &&
-      req.title &&
-      req.userid &&
-      req.price
+      (req.audio &&
+        req.coverImg &&
+        req.description &&
+        req.grade &&
+        req.pdf &&
+        req.title &&
+        req.email &&
+        req.price,
+      req.previewpdf)
     ) {
       const db = new pg.Client({
         connectionString: process.env.DATABASE_URL as string,
@@ -34,16 +35,16 @@ export async function POST(Req: Request, res: Response) {
       await db.connect();
 
       await db.query(
-        "INSERT INTO requests(requesttitle, requestdescription, requestgrade, requestmakerid, requestimgcover, requestpdf, requestaudiopreview, requestfullfilled, requestprice) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)",
+        "INSERT INTO pieces(piecetitle, piecedescription, piecegrade, pieceowner, piececover, piecepreviewpdf, piecepdf, pieceaudio, pieceprice) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)",
         [
           req.title,
           req.description,
           req.grade,
-          req.userid,
+          req.email,
           req.coverImg,
+          req.previewpdf,
           req.pdf,
           req.audio,
-          false,
           req.price,
         ]
       );

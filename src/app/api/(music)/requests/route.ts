@@ -9,7 +9,9 @@ export async function GET(Req: Request, Res: Response) {
 
     await db.connect();
 
-    const Requests = await db.query("SELECT * FROM requests");
+    const Requests = await db.query(
+      "SELECT * FROM requests JOIN users ON users.userid = requests.requestmakerid"
+    );
 
     await db.end();
 

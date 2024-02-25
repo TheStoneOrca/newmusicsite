@@ -16,5 +16,19 @@ CREATE TABLE requests(
   requestimgcover TEXT,
   requestpdf TEXT,
   requestaudiopreview TEXT,
-  requestfullfilled BOOLEAN
+  requestfullfilled BOOLEAN,
+  requestprice MONEY
+);
+
+CREATE TABLE pieces(
+  pieceid SERIAL PRIMARY KEY,
+  piecetitle TEXT,
+  piecedescription TEXT,
+  piecegrade INT,
+  pieceowner TEXT REFERENCES users(email),
+  piececover TEXT,
+  piecepreviewpdf TEXT,
+  piecepdf TEXT,
+  pieceaudio TEXT,
+  pieceprice MONEY
 );
