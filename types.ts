@@ -8,4 +8,8 @@ export type MusicRequest = {
   requestpdf: string;
   requestaudiopreview: string;
   requestfullfilled: string;
+  userid?: number;
+  email?: string;
+  fname?: string;
+  lname?: string;
 };

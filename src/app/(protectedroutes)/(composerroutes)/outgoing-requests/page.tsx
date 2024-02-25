@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { MusicRequest } from "../../../../../types";
 import useUser from "@/app/hooks/getuser";
 import { Loader2Icon } from "lucide-react";
-import MusicRequests from "./__components/requests";
+import MusicRequests from "../../../../components/requests";
 
 export default function OutGoingRequestsPage() {
   const [requests, setRequests] = useState<Array<MusicRequest>>();

@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { MusicRequest } from "../../../../../../types";
+import { MusicRequest } from "../../types";
 import Error from "./error";
 import Success from "./success";
 
