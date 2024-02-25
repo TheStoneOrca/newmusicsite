@@ -11,6 +11,7 @@ interface RequestDetails {
   email: string;
   price: number;
   previewpdf: string;
+  type: string;
 }
 
 export async function POST(Req: Request, res: Response) {
@@ -25,7 +26,8 @@ export async function POST(Req: Request, res: Response) {
         req.pdf &&
         req.title &&
         req.email &&
-        req.price,
+        req.price &&
+        req.type,
       req.previewpdf)
     ) {
       const db = new pg.Client({
@@ -35,7 +37,7 @@ export async function POST(Req: Request, res: Response) {
       await db.connect();
 
       await db.query(
-        "INSERT INTO pieces(piecetitle, piecedescription, piecegrade, pieceowner, piececover, piecepreviewpdf, piecepdf, pieceaudio, pieceprice) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)",
+        "INSERT INTO pieces(piecetitle, piecedescription, piecegrade, pieceowner, piececover, piecepreviewpdf, piecepdf, pieceaudio, pieceprice, piecetype) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)",
         [
           req.title,
           req.description,
@@ -46,6 +48,7 @@ export async function POST(Req: Request, res: Response) {
           req.pdf,
           req.audio,
           req.price,
+          req.type,
         ]
       );
 

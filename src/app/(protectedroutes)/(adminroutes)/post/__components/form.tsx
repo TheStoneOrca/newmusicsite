@@ -14,6 +14,13 @@ import HandlePostSubmit from "./handlesubmit";
 import { useState } from "react";
 import { AlertTriangle } from "lucide-react";
 import Error from "./error";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function PostPieceForm() {
   const [error, setError] = useState<boolean>(false);
@@ -56,6 +63,22 @@ export default function PostPieceForm() {
             <Input type="number" name="price" required />
           </div>
           <div>
+            <Label>Piece Type</Label>
+            <Select name="piecetype" required>
+              <SelectTrigger>
+                <SelectValue placeholder="Pick A Music Type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="solo">Solo</SelectItem>
+                <SelectItem value="orchestra">Orchestra</SelectItem>
+                <SelectItem value="piano">Piano</SelectItem>
+                <SelectItem value="band">Band</SelectItem>
+                <SelectItem value="rock">Rock</SelectItem>
+                <SelectItem value="strings">Strings</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
             <Label>
               Composer's Email
               <p className="text-sm">
@@ -80,6 +103,7 @@ export default function PostPieceForm() {
             <Label>Piece Audio</Label>
             <Input type="file" accept=".mp3" name="audio" required />
           </div>
+
           {error && <Error />}
           <Button type="submit">Request</Button>
         </form>

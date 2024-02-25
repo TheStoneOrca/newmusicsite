@@ -18,6 +18,9 @@ export default function RequestPage() {
   useEffect(() => {
     fetch(`/api/requests/${id}`).then((res) => {
       res.json().then((result) => {
+        if (!result.requests) {
+          return (window.location.href = "/requests");
+        }
         if (result.status === 200) {
           setFullFilled(result.requests.requestfullfilled);
           setRequestDetails(result.requests);

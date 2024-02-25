@@ -65,6 +65,7 @@ export default async function HandlePostSubmit(data: FormData) {
       audio: audio.secure_url,
       email: data.get("email"),
       price: Number(data.get("price")),
+      type: data.get("piecetype"),
     };
 
     const fetchRequestPost = await fetch(`${process.env.DOMAIN}/api/post`, {

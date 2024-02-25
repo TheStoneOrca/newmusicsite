@@ -30,5 +30,6 @@ CREATE TABLE pieces(
   piecepreviewpdf TEXT,
   piecepdf TEXT,
   pieceaudio TEXT,
-  pieceprice MONEY
+  pieceprice MONEY,
+  piecetype TEXT
 );
