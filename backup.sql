@@ -33,3 +33,9 @@ CREATE TABLE pieces(
   pieceprice MONEY,
   piecetype TEXT
 );
+
+CREATE TABLE cartitems(
+  itemid SERIAL PRIMARY KEY,
+  itempiece INT REFERENCES pieces(pieceid),
+  itemowner INT REFERENCES users(userid)
+);

@@ -14,3 +14,21 @@ export type MusicRequest = {
   lname?: string;
   requestprice?: number;
 };
+
+export type Piece = {
+  pieceid?: number;
+  piecetitle?: string;
+  piecedescription?: string;
+  piecegrade?: number;
+  pieceowner: string;
+  piececover: string;
+  piecepreviewpdf: string;
+  piecepdf: string;
+  pieceaudio: string;
+  pieceprice: number;
+  piecetype: "strings" | "band" | "solo" | "piano" | "rock" | "orchestra";
+  userid?: number;
+  email?: string;
+  fname?: string;
+  lname?: string;
+};

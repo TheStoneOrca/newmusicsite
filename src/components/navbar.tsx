@@ -11,7 +11,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "./ui/dropdown-menu";
-import { Menu } from "lucide-react";
+import { Menu, ShoppingCartIcon } from "lucide-react";
 
 export default function Navbar() {
   return (
@@ -54,6 +54,11 @@ export default function Navbar() {
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
+      </div>
+      <div className="flex justify-end">
+        <Link href="/cart">
+          <ShoppingCartIcon />
+        </Link>
       </div>
     </div>
   );
