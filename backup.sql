@@ -39,3 +39,9 @@ CREATE TABLE cartitems(
   itempiece INT REFERENCES pieces(pieceid),
   itemowner INT REFERENCES users(userid)
 );
+
+CREATE TABLE boughtitems(
+  boughtitemid SERIAL PRIMARY KEY,
+  boughtitem INT REFERENCES pieces(pieceid),
+  buyer INT REFERENCES users(userid)
+)
