@@ -7,7 +7,7 @@ First, install all the dependencies:
 npm i
 ```
 
-Then create a .env file at the root of your project and add these keys:
+Then create a .env file at the root of your project and add these keys with your own values:
 
 ```env
 DATABASE_URL=
@@ -16,7 +16,6 @@ DOMAIN=
 NEXT_PUBLIC_STRIPE_PUBLIC=
 STRIPE_SECRET=
 ```
-Don't forget to add the values.
 
 Now, run the development server:
 
