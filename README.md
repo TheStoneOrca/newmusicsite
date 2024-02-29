@@ -2,7 +2,23 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, install all the dependencies:
+```bash
+npm i
+```
+
+Then create a .env file at the root of your project and add these keys:
+
+```env
+DATABASE_URL=
+JWT_SECRET=
+DOMAIN=
+NEXT_PUBLIC_STRIPE_PUBLIC=
+STRIPE_SECRET=
+```
+Don't forget to add the values.
+
+Now, run the development server:
 
 ```bash
 npm run dev
