@@ -1,6 +1,6 @@
 CREATE TABLE users(
   userid SERIAL PRIMARY KEY,
-  email TEXT,
+  email TEXT UNIQUE,
   password TEXT,
   fname TEXT,
   lname TEXT,

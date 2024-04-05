@@ -8,55 +8,33 @@ export async function POST(Request: Request, Response: Response) {
   try {
     const event = await Request.json();
 
-    const db = new pg.Client({
+    const db = new pg.Pool({
       connectionString: process.env.DATABASE_URL as string,
     });
 
-    // Handle the event
-    switch (event.type) {
-      case "payment_intent.succeeded":
-        const paymentIntent = event.data.object;
-        // Then define and call a method to handle the successful payment intent.
-        // handlePaymentIntentSucceeded(paymentIntent);
-        break;
-      case "checkout.session.completed":
-        try {
-          const checkoutSession = event.data.object;
-          const session = await stripe.checkout.sessions.retrieve(
-            checkoutSession.id
-          );
+    // Handle the ev
+    if (event.type === "checkout.session.completed") {
+      try {
+        const checkoutSession = event.data.object;
+        const session = await stripe.checkout.sessions.retrieve(
+          checkoutSession.id
+        );
 
-          console.log(session.metadata!.itemIDs);
-          console.log(JSON.parse(session.metadata!.itemIDs));
+        const itemIds: Array<any> = JSON.parse(session.metadata!.itemIDs);
 
-          const itemIds = JSON.parse(session.metadata!.itemIDs);
+        const itemDetails = itemIds.map((item) => {
+          return { buyer: Number(session.metadata!.buyer), itemid: item };
+        });
 
-          itemIds.forEach(async (item: any) => {
-            console.log(item);
-            console.log(Number(session.metadata!.buyer));
-            await db.query(
-              "INSERT INTO boughtitems(boughtitem, buyer) VALUES($1, $2)",
-              [item, Number(session.metadata!.buyer)]
-            );
-          });
-
-          console.log("for each");
-
-          await db.query("DELETE FROM cartitems WHERE itemowner = $1", [
-            session.metadata!.buyer,
-          ]);
-
-          console.log("h");
-        } catch (error) {
-          console.error(error);
-        }
-
-        break;
-      // ... handle other event types
-      default:
-        console.log(`Unhandled event type ${event.type}`);
+        await fetch(`${process.env.DOMAIN}/api/boughtitem`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ purchaseDetails: itemDetails }),
+        });
+      } catch (error) {
+        console.error(error);
+      }
     }
-
     await db.end();
 
     // Return a response to acknowledge receipt of the event

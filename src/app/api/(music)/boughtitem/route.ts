@@ -2,29 +2,30 @@ import { NextResponse } from "next/server";
 import pg from "pg";
 
 interface RequestDetails {
-  pieceid: number;
-  userid: number;
+  purchaseDetails: Array<{ buyer: number; itemid: number }>;
 }
 
 export async function POST(Req: Request, res: Response) {
   try {
     const req: RequestDetails = await Req.json();
 
-    if (req.pieceid && req.userid) {
-      const db = new pg.Client({
+    if (req.purchaseDetails) {
+      const db = new pg.Pool({
         connectionString: process.env.DATABASE_URL as string,
       });
 
       await db.connect();
 
-      console.log(req);
+      req.purchaseDetails.forEach((item) => {
+        db.query("INSERT INTO boughtitems(boughtitem, buyer) VALUES($1, $2)", [
+          item.itemid,
+          item.buyer,
+        ]);
+      });
 
-      await db.query(
-        "INSERT INTO cartitems(itemowner, itempiece) VALUES($1, $2)",
-        [req.userid, req.pieceid]
-      );
-
-      console.log("COMPLEETE");
+      await db.query("DELETE FROM cartitems WHERE itemowner = $1", [
+        req.purchaseDetails[0].buyer,
+      ]);
 
       await db.end();
 
