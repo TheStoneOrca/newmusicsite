@@ -16,6 +16,7 @@ interface PieceTypes {
   piecedescription: string;
   piececomposer: string;
   piececover: string;
+  pieceid: number;
 }
 
 export default function BoughtItemCard({
@@ -23,11 +24,15 @@ export default function BoughtItemCard({
   piecedescription,
   piececover,
   piececomposer,
+  pieceid,
 }: PieceTypes) {
   const router = useRouter();
 
   return (
-    <Card className="w-64 hover:cursor-pointer">
+    <Card
+      className="w-64 hover:cursor-pointer"
+      onClick={() => router.push(`/library/piece/${pieceid}`)}
+    >
       <CardHeader>
         <CardTitle>{piecetitle}</CardTitle>
         <CardDescription>{piecedescription}</CardDescription>

@@ -14,7 +14,7 @@ export default function LibraryPage() {
   useEffect(() => {
     if (isReady == false) return;
 
-    fetch(`/api/boughtitem/${user?.userid}`).then((res) =>
+    fetch(`/api/boughtitems/${user?.userid}`).then((res) =>
       res.json().then((result) => {
         if (result.status === 200) {
           setBoughtItems(result.boughtitems);
@@ -29,6 +29,7 @@ export default function LibraryPage() {
           <div className="flex flex-col gap-y-5 justify-center">
             {boughtItems.map((item) => (
               <BoughtItemCard
+                pieceid={item.boughtitemid}
                 piecetitle={item.piecetitle as any}
                 piecedescription={item.piecedescription as any}
                 piececomposer={item.fname + " " + item.lname}

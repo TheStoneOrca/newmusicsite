@@ -29,15 +29,20 @@ export async function POST(Req: Request, res: Response) {
 
       await db.end();
 
-      return NextResponse.json({ status: 200 });
+      return NextResponse.json({ status: 200, received: true });
     } else {
       return NextResponse.json({
         status: 404,
         msg: "Not all details sent in request. Rare Error",
+        received: true,
       });
     }
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ status: 500, msg: "Unexpected Server Error." });
+    return NextResponse.json({
+      status: 500,
+      msg: "Unexpected Server Error.",
+      received: true,
+    });
   }
 }

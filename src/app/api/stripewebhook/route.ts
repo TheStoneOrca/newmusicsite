@@ -12,7 +12,6 @@ export async function POST(Request: Request, Response: Response) {
       connectionString: process.env.DATABASE_URL as string,
     });
 
-    // Handle the ev
     if (event.type === "checkout.session.completed") {
       const checkoutSession = event.data.object;
       const session = await stripe.checkout.sessions.retrieve(
@@ -25,11 +24,18 @@ export async function POST(Request: Request, Response: Response) {
         return { buyer: Number(session.metadata!.buyer), itemid: item };
       });
 
-      await fetch(`${process.env.DOMAIN}/api/boughtitem`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ purchaseDetails: itemDetails }),
-      });
+      const yieldForFetch = await fetch(
+        `${process.env.DOMAIN}/api/boughtitem`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ purchaseDetails: itemDetails }),
+        }
+      );
+
+      const result = await yieldForFetch.json();
+
+      // TODO: Add Event if fetch fails such as maybe a logging.
 
       await db.end();
 
